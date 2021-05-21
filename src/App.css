@@ -1,13 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
 button {
   outline: none;
   border: 0;
   cursor: pointer;
 }
 
-.habit {
-  font-size: 2.5rem;
-  padding: 0.5em;
-  list-style: none;
+.navbar {
+  font-size: 2rem;
+  padding: 1em;
+  background-color: goldenrod;
+}
+
+.navbar-logo {
+  color: crimson;
+  margin-right: 0.5em;
 }
 
 .navbar-count {
@@ -21,6 +30,12 @@ button {
   background-color: green;
   color: white;
   border-radius: 50%;
+}
+
+.habit {
+  font-size: 2.5rem;
+  padding: 0.5em;
+  list-style: none;
 }
 
 .habit-button {
