@@ -9,11 +9,45 @@ class Habits extends Component {
       { id: 3, name: 'Coding', count: 0 },
     ],
   };
+
+  handleIncrement = habit => {
+    console.log(`handleIncrement ${habit.name}`);
+    const habits = [...this.state.habits]; // ...기존의 배열을 복사해온다.
+    const index = habits.indexOf(habit); //index값을 가져옴
+    console.log('habits + index : ' + habits + ';;' + index);
+    habits[index].count++;
+    this.setState({ habits }); // == habit(key) : habit(value(로컬변수))키와 벨류가 같으면 생략이 가능함
+    // habit.count++;
+    // this.setState(this.state);
+  };
+
+  handleDecrement = habit => {
+    console.log(`handleDecrement ${habit.name}`);
+    const habits = [...this.state.habits];
+    const index = habits.indexOf(habit);
+    console.log('habits + index : ' + habits + ';;' + index);
+    const count = habits[index].count - 1;
+    habits[index].count = count < 0 ? 0 : count;
+    this.setState({ habits });
+  };
+
+  handleDelete = habit => {
+    console.log(`handleDelete ${habit.name}`);
+    const habits = this.state.habits.filter(item => item.id !== habit.id);
+    this.setState({ habits });
+  };
+
   render() {
     return (
       <ul>
         {this.state.habits.map(habit => (
-          <Habit key={habit.id} habit={habit} /> //habit이라는 props 데이터에 habit값을 전달함 오브젝트를 전달
+          <Habit
+            key={habit.id}
+            habit={habit}
+            onIncrement={this.handleIncrement}
+            onDecrement={this.handleDecrement}
+            onDelete={this.handleDelete}
+          /> //habit이라는 props 데이터에 habit값을 전달함 오브젝트를 전달
         ))}
       </ul>
     );
