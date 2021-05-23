@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 class Habit extends Component {
+  componentDidUpdate(){
+    //컴포넌트의 데이터가 업데이트 될때 마다 실행됨
+  }
   handleIncrement = () => {
     this.props.onIncrement(this.props.habit);
   };

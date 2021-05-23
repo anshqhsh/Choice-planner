@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-class HabitAddForm extends Component {
+class HabitAddForm extends PureComponent {
   inputRef = React.createRef(); //맴버변수로 ref오브젝트를 만들고
   onSubmit = event => {
     event.preventDefault(); //브라우저의 기본기능을 취소 (리프레쉬를 막음 );
