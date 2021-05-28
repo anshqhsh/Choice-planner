@@ -1,81 +1,25 @@
-import React, { Component } from 'react';
+import { useEffect, useState } from 'react';
 import './app.css';
-import Habits from './components/habits';
-import Navbar from './components/navbar';
+import VideoList from './components/video_list/video_list';
 
-class App extends Component {
-  state = {
-    habits: [
-      { id: 1, name: 'Reading', count: 0 },
-      { id: 2, name: 'Running', count: 0 },
-      { id: 3, name: 'Coding', count: 0 },
-    ],
-  };
+function App() {
+  const [videos, setVideos] = useState([]);
 
-  handleIncrement = habit => {
-    const habits = this.state.habits.map(item => {
-      if (item.id === habit.id) {
-        return { ...habit, count: habit.count + 1 }; //기존 해빗과 동일한 오브젝트를 만듦
-      }
-      return item;
-    });
-    /**[...this.state.habits]; // ...기존의 배열을 복사해온다.
-    const index = habits.indexOf(habit); //index값을 가져옴
-    console.log('habits + index : ' + habits + ';;' + index);
-    habits[index].count++; */
-    this.setState({ habits }); // == habit(key) : habit(value(로컬변수))키와 벨류가 같으면 생략이 가능함
-    // habit.count++;
-    // this.setState(this.state);
-  };
+  useEffect(() => {
+    const requestOptions = {
+      method: 'GET',
+      redirect: 'follow',
+    };
 
-  handleDecrement = habit => {
-    const habits = this.state.habits.map(item => {
-      if (item.id === habit.id) {
-        const count = habit.count - 1;
-        return { ...habit, count: count < 0 ? 0 : count }; //기존 해빗과 동일한 오브젝트를 만듦
-      }
-      return item;
-    });
-    this.setState({ habits });
-  };
+    fetch(
+      'https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=25&key=AIzaSyCBEUjm2QcPES2RFP7QENoKsmI8kbkA4Oo',
+      requestOptions
+    )
+      .then(response => response.json()) //fetch(json)가 정상적으로 받아지면 반응을 텍스트로 변환하고
+      .then(result => setVideos(result.items)) //비디오를 받아와서 컴포넌트에 데이터를 업데이트
+      .catch(error => console.log('error', error));
+  }, []); //[]를 두번째 인자로 주면 컴포넌트가 업데이트될때마다 이 함수를 부르지 않는다.
 
-  handleDelete = habit => {
-    console.log(`handleDelete ${habit.name}`);
-    const habits = this.state.habits.filter(item => item.id !== habit.id);
-    this.setState({ habits });
-  };
-
-  handleAdd = name => {
-    const habits = [...this.state.habits, { id: Date.now(), name, count: 0 }];
-    this.setState({ habits });
-  };
-
-  handleReset = () => {
-    const habits = this.state.habits.map(habit => {
-      if (habit.count !== 0) {
-        return { ...habit, count: 0 };
-      }
-      return habit;
-    });
-    this.setState({ habits });
-  };
-  render() {
-    return (
-      <>
-        <Navbar
-          totalCount={this.state.habits.filter(item => item.count > 0).length}
-        />
-        <Habits
-          habits={this.state.habits}
-          onIncrement={this.handleIncrement}
-          onDecrement={this.handleDecrement}
-          onDelete={this.handleDelete}
-          onAdd={this.handleAdd}
-          onReset={this.handleReset}
-        />
-      </>
-    );
-  }
+  return <VideoList videos={videos} />;
 }
-
 export default App;
