@@ -13,11 +13,14 @@ function App({ youtube }) {
   const selectVideo = video => {
     setSelectedVideo(video);
   };
-
+  //검색시 리스트로 돌아가기
   const search = query => {
     youtube
       .search(query) //
-      .then(videos => setVideos(videos));
+      .then(videos => {
+        setVideos(videos);
+        setSelectedVideo(null);
+      });
   };
   useEffect(() => {
     youtube
