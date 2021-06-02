@@ -2,7 +2,7 @@
   display: flex;
   height: 4rem;
   padding: 0.5em 1em;
-  background: black;
+  background: rgb(147, 149, 151);
   color: white;
 }
 
@@ -15,14 +15,17 @@
 .input {
   flex-basis: 100%;
   font-size: 1.2rem;
-  outline: 0l
+  outline: 0;
 }
 
 .button{
-  background-color: darkgray;
-  outline: 0;
+  background-color: gray;
+  outline: red;
 }
 .buttonImg{
   height: 100%;
   padding: 0.5em 0.2em;
+}
+.title{
+  margin: 0.2em;
 }

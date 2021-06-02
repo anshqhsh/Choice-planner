@@ -24,13 +24,13 @@ const SearchHeader = ({ onSearch }) => {
     <header className={styles.header}>
       <div className={styles.logo}>
         <img className={styles.img} src="/images/logo.png" alt="logo" />
-        <h1 className={styles.title}>Youtube</h1>
+        <h2 className={styles.title}>Choice Planner</h2>
       </div>
       <input
         ref={inputRef}
         className={styles.input}
         type="search"
-        placeholder="Search...?"
+        placeholder="Search"
         onKeyPress={onKeyPress}
       />
       <button className={styles.button} type="submit" onClick={onClick}>

@@ -1,5 +1,13 @@
-.app {
-  max-width: 80rem;
+.app{
+  display:flex;
+}
+.board{
+  float: left;
+  width: 50%;
+}
+.youtube {
+  float: right;
+  width: 50%;
 }
 
 .content{
